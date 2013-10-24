@@ -1,0 +1,61 @@
+    <div class="clear" style="height: 20px;"></div>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span2">
+                <button type="button" class="btn btn-default" ng-click="addClientWrap()">Add new client</button>
+<!--
+                <button type="button" class="btn btn-default" ng-click="addClientWrap()" ng-model="formE">Add new client</button>
+-->
+            </div>
+            <div class="span10">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Age</td>
+                        <td>Actions</td>
+                    </tr>
+
+                    <tr ng-repeat="client in data">
+                        <td>{{client.firstname | uppercase}}</td>
+                        <td>{{client.lastname}}</td>
+                        <td>{{client.age}}</td>
+                    <td>
+                        <button type="button" class="btn btn-default" ng-click="editIdSetNew(client.id)">Edit</button>
+                        <button type="button" class="btn btn-default" ng-click="deleteIdSetNew(client.id)">Remove</button>
+                    </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+            <div modal="addClientModal" options="opts" ng-show="formE">
+            <form name="form" ng-submit="sendData()">
+                <fieldset>
+                <div class="modal-header">
+                <button type="button" class="close" ng-click="addClientModal = false" aria-hidden="true">&times;</button>
+                <h4>Add new client</h4>
+                </div>
+                <div class="modal-body">
+                        <legend>Add new client</legend>
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" name="firstname" id="firstname" placeholder="Enter your first name..." class="form-control" ng-model="client.firstname" ng-minlength="3" ng-maxlength="10" ng-pattern="nameReg" required tooltip-html-unsafe="{{form.firstname.$error | inputErrors}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" name="lastname" id="lastname" placeholder="Enter your last name..." class="form-control" ng-model="client.lastname" ng-minlength="3" ng-maxlength="8" ng-pattern="nameReg" required tooltip-html-unsafe="{{form.lastname.$error | inputErrors}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="text" name="age" id="age" placeholder="Enter your age..." class="form-control" ng-model="client.age" ng-maxlength="3" required ng-pattern="numReg" tooltip-html-unsafe="{{form.age.$error | inputErrors}}">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="addClientModal = false">Close</button>
+                    <input type="submit" id="submit" class="btn btn-primary" ng-disabled="form.$invalid || isUnchanged(user)">
+                </div>
+                </fieldset>
+                </form>
+           </div>

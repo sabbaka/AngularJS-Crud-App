@@ -1,0 +1,116 @@
+    <div class="container">
+        <div  class="row-fluid">
+            <div class="span2">
+                <button type="button" class="btn btn-default" ng-click="addClientModal = true">Add new client</button>
+            </div>
+            <div class="span10">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Age</td>
+                        <td>Actions</td>
+                    </tr>
+                    <tr ng-repeat="client in data">
+                        <td>{{client.firstname}}</td>
+                        <td>{{client.lastname}}</td>
+                        <td>{{client.age}}</td>
+                    <td>
+                        <button type="button" class="btn btn-default" ng-click="editIdSet(client.id)">Edit</button>
+                        <button type="button" class="btn btn-default" ng-click="deleteIdSet(client.id)">Remove</button>
+                    </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+            <div modal="addClientModal" options="opts">
+                    <div class="modal-header">
+                <button type="button" class="close" ng-click="addClientModal = false" aria-hidden="true">&times;</button>
+                <h4>Add new client</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <fieldset>
+                        <legend>Add new client</legend>
+
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" name="firstname" id="firstName" placeholder="Enter your first name..." class="form-control" ng-model="client.firstname" tooltip="The Field is Required" tooltop-trigger="focus" tooltip-placement="right">
+                            {{addClientErrors.firstname}}
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" name="lastname" id="lastName" placeholder="Enter your last name..." class="form-control" ng-model="client.lastname" tooltip="The Field is Required" tooltop-trigger="focus" tooltip-placement="right">
+                            {{addClientErrors.lastname}}
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="text" name="age" id="age" placeholder="Enter your age..." class="form-control" ng-model="client.age" tooltip="The Field is Required" tooltop-trigger="focus" tooltip-placement="right">
+                            {{addClientErrors.age}}
+                        </div>
+                        <button type="submit" class="btn" ng-click="addClient(client)">Add</button>
+                    </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="addClientModal = false">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="addClient(client)">Add client</button>
+                </div>
+           </div>
+
+
+
+    <div modal="deleteClientModal" options="opts">
+      <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" ng-click="deleteClientModal = false">&times;</button>
+        <h4 class="modal-title">Remove client</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure?</p>
+        {{$scope.deleteClientErrors}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="deleteClientModal = false">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="removeClient(deleteId)">Remove client</button>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div modal="editClientModal" options="opts">
+                <div class="modal-header">
+                <button type="button" class="close" aria-hidden="true" ng-click="editClientModal=false">&times;</button>
+                <h4>Edit client</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <fieldset>
+                        <input type="hidden" />
+                        <legend>Edit client</legend>
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" name="firstName" id="firstName" placeholder="Enter your first name..." class="form-control" ng-model="clientEdit.firstname">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" name="lastName" id="lastName" placeholder="Enter your last name..." class="form-control" ng-model="clientEdit.lastname">
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="text" name="age" id="age" placeholder="Enter your age..." class="form-control" ng-model="clientEdit.age">
+                        </div>
+                        <button type="submit" class="btn" ng-click="editClient(clientEdit.id, clientEdit)">Edit</button>
+                    </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="editClientModal=false">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="editClient(clientEdit.id, clientEdit)">Edit client</button>
+                </div>
+    </div>
